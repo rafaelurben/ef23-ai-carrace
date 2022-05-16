@@ -1,7 +1,7 @@
 import os
 import json
 
-tracepath = "../data"
+tracepath = "../../NeuralRacingV1/data"
 
 def clearTraces():
 	
