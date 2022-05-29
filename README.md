@@ -10,7 +10,11 @@ https://github.com/gymburgdorf-ef23/NeuralRacingV1/tree/main/pyworld
 
 ### Setup
 
-`pip install git+https://github.com/rafaelurben/python-neural-network.git`
+```sh
+git clone https://github.com/rafaelurben/ef23-ai-carrace.git
+cd ef23-ai-carrace
+python -m pip install -r requirements.txt
+```
 
 #### Folder structure
 
@@ -20,4 +24,10 @@ https://github.com/gymburgdorf-ef23/NeuralRacingV1/tree/main/pyworld
     - scripts
       - pyworld
   - NeuralRacingV1
-    - data
+    - data (default `TRACES_PATH`)
+
+An alternative traces path can be set via the `TRACES_PATH` environment variable.
+
+### Flow
+
+Running a script in the `scripts` folder will generate a traces file in the `TRACES_PATH` folder.

@@ -1,7 +1,9 @@
 import os
+import os.path
 import json
 
-tracepath = "../../NeuralRacingV1/data"
+defaulttracepath = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), "NeuralRacingV1", "data")
+tracepath = os.getenv('TRACES_PATH', defaulttracepath)
 
 def clearTraces():
 	
