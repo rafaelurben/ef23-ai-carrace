@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# custom
+networks/**/*gen*.json
+scripts/train_*.py
