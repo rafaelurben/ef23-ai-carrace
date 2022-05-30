@@ -11,7 +11,7 @@ name = "carai_v4"
 folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), "networks", name, "")
 hidden_layers = [4]
 
-training_mode = True
+training_mode = False
 
 class CarGenome(training.Genome):
     def setup(self, track):
