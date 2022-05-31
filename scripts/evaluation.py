@@ -2,14 +2,14 @@ from pyworld.Car import Car
 from pyworld.Monaco import setupMonaco
 from pyworld.Traces import clearTraces, saveTraces
 
-from neural_network import loader, training
+from neural_network import NeuroLoader, Genome
 
 import os.path
 
 name = "carai_v5"
 folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), "networks", name, "")
 
-class CarGenome(training.Genome):
+class CarGenome(Genome):
     def setup(self, track):
         self.obj = Car(track)
 
@@ -39,7 +39,7 @@ track_monaco = setupMonaco()
 
 clearTraces()
 
-myloader = loader.NeuroLoader(name=name, folder=folder)
+myloader = NeuroLoader(name=name, folder=folder)
 carai = myloader.get_genome(CarGenome, track=track_monaco)
 carai.run_evaluation(5000)
 print(carai.score)
