@@ -1,1 +1,2 @@
 git+https://github.com/rafaelurben/python-neural-network#egg=python-neural-network>=1.0.0
+tqdm==4.62.3

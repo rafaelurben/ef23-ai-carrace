@@ -1,13 +1,28 @@
+from tqdm import tqdm
+
+from pyworld import Tracks
 from pyworld.Car import Car
-from pyworld.Monaco import setupMonaco
 from pyworld.Traces import clearTraces, saveTraces
 
 from neural_network import NeuroLoader, Genome
 
 import os.path
 
-name = "carai_v5"
-folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), "networks", name, "")
+# --- TODO: EDIT HERE --- #
+
+TRACKS = {
+    "monaco": Tracks.monaco,
+    "monaco_inverted": Tracks.monaco_inverted,
+    # add more tracks here
+}
+TRACESPATH = os.getenv('TRACES_PATH', os.getcwd()) # change if desired
+TIMESTEPS = 5000
+
+# --- END EDIT --- #
+
+NET_NAME = "carai_v5"
+NET_FOLDER = os.path.join(os.path.dirname(os.path.dirname(__file__)), "networks", NET_NAME, "")
+
 
 class CarGenome(Genome):
     def setup(self, track):
@@ -27,21 +42,20 @@ class CarGenome(Genome):
             return False
         return True
 
-    def run_evaluation(self, timestepamount=5000):
-        for _ in range(timestepamount):
+    def run_evaluation(self, generation: int = None):
+        for _ in tqdm(range(TIMESTEPS)):
             if not self.step():
-                break
+                return "Failed due to collision"
+        return "Succeeded without collision"
 
-        return self.obj.score
+myloader = NeuroLoader(name=NET_NAME, folder=NET_FOLDER)
 
+print(f"Starting evaluation for {len(TRACKS)} tracks...")
 
-track_monaco = setupMonaco()
+for name, track in TRACKS.items():
+    print(f"[{name}] Running evaluation... ({TIMESTEPS} timesteps)")
+    carai = myloader.get_genome(CarGenome, track=track)
+    message = carai.run_evaluation(5000)
+    print(f"[{name}] Evaluation finished! Score: {carai.score} - Message: {message}")
 
-clearTraces()
-
-myloader = NeuroLoader(name=name, folder=folder)
-carai = myloader.get_genome(CarGenome, track=track_monaco)
-carai.run_evaluation(5000)
-print(carai.score)
-
-saveTraces([carai.obj])
+    saveTraces([carai.obj], "_rafael_"+name, TRACESPATH)

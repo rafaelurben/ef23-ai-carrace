@@ -4,27 +4,21 @@ This is part of a school project - please ignore.
 
 ## Setup
 
+Clone this repository to your local machine.
+
+Optional: Set the `TRACES_PATH` environment variable to point to the directory where the traces are stored. (can also be overriden in the code)
+
+### Install dependencies
+
 ```sh
-git clone https://github.com/rafaelurben/ef23-ai-carrace.git
-cd ef23-ai-carrace
 python -m pip install -r requirements.txt
 ```
 
-### Folder structure
-
-- (parent)
-  - ef23-ai-carrace
-    - networks
-    - scripts
-      - pyworld
-  - NeuralRacingV1
-    - data (default `TRACES_PATH`)
-
-An alternative traces path can be set via the `TRACES_PATH` environment variable.
+Alternative in case of name conflicts: Clone/Download `python-neural-network` from [GitHub](https://github.com/rafaelurben/python-neural-network), move the `neural_network` folder into the same folder where `evaluation.py` lives and install `tqdm` via pip.
 
 ## Run
 
-Run the `evaluation.py` script to generate traces in the `TRACES_PATH` folder.
+Run the `evaluation.py` script to generate traces inside the tracespath folder.
 
 ## Source
 
