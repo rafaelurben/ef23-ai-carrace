@@ -2,7 +2,8 @@ import os
 import os.path
 import json
 
-def clearTraces(tracespath):
+
+def clearTraces(tracespath=os.getenv('TRACES_PATH', os.getcwd())):
     if tracespath is None:
         raise EnvironmentError("TRACES_PATH not set")
 
@@ -11,7 +12,8 @@ def clearTraces(tracespath):
     for t in tracefiles:
         os.remove(tracespath + "/" + t)
 
-def saveTraces(cars, gen_or_name, tracespath):
+
+def saveTraces(cars, gen_or_name=0, tracespath=os.getenv('TRACES_PATH', os.getcwd())):
     if tracespath is None:
         raise EnvironmentError("TRACES_PATH not set")
 
