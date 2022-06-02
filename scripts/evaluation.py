@@ -54,8 +54,8 @@ print(f"Starting evaluation for {len(TRACKS)} tracks...")
 
 for name, track in TRACKS.items():
     print(f"[{name}] Running evaluation... ({TIMESTEPS} timesteps)")
-    carai = myloader.get_genome(CarGenome, track=track)
-    message = carai.run_evaluation(5000)
-    print(f"[{name}] Evaluation finished! Score: {carai.score} - Message: {message}")
+    genome = myloader.get_genome(CarGenome, track=track)
+    message = genome.run_evaluation(TIMESTEPS)
+    print(f"[{name}] Evaluation finished! Score: {genome.score} - Message: {message}")
 
-    saveTraces([carai.obj], "_rafael_"+name, TRACESPATH)
+    saveTraces([genome.obj], "_rafael_"+name, TRACESPATH)
